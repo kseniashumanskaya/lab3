@@ -11,21 +11,22 @@ int TheNumberOfTheFirstRowContaining0(vector <vector<int>>vec, int size) {
             if (vec[i][j] == 0)
                 m++;
         }
-        if (m > 0)
-        {
+        if (m > 0) {
             num = i;
             break;
         }
-
     }
     return num;
 }
 
 int main() {
-
     int size;
     cout << "enter the size of the matrix:" << endl;
     cin >> size;
+    if (size > 10) {
+        cout << "Wrong, enter size < = 10";
+        return 1;
+    }
 
     cout << " enter 0 if you want to fill the matrix with random numbers and 1 - from consol" << endl;
     int matrix_filling_option;
@@ -79,7 +80,6 @@ int main() {
         }
     }
 
-
     for (int i = 0; i < vec.size(); i++) {
         for (int j = 0; j < vec.size(); j++)
         {
@@ -132,6 +132,7 @@ int main() {
                 }
             }
         }
+
         for (int i = 0; i < vec.size(); i++) {
             for (int j = 0; j < vec.size(); j++)
             {
