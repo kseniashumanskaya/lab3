@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
-int TheNumberOfTheFirstRowContaining0 (vector <vector<int>>vec, int size) {
+int TheNumberOfTheFirstRowContaining0(vector <vector<int>>vec, int size) {
     int m, num;
     for (int i = 0; i < size; i++) {
         m = 0;
@@ -41,35 +41,53 @@ int main() {
             }
             vec.push_back(temp);
         }
+        for (int i = 0; i < vec.size(); i++) {
+            for (int j = 0; j < vec.size(); j++)
+                vec[i][j] = vec[j][i];
+        }
     }
 
     else {
+        vector <vector<int>> vec2;
         cout << "enter matrix elements:" << endl;
-
+        for (int i = 0; i < size; i++) {
+            vector <int> vec1;
+            int n;
+            for (int j = 0; j < i + 1; j++) {
+                cin >> n;
+                vec1.push_back(n);
+            }
+            vec2.push_back(vec1);
+            vector <vector<int>> vec;
+        }
         for (int i = 0; i < size; i++) {
             vector <int> temp;
-            int n;
             for (int j = 0; j < size; j++) {
-                cin >> n;
-                temp.push_back(n);
+
+                temp.push_back(0);
             }
             vec.push_back(temp);
         }
-    }
-   
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++)
-            vec[i][j] = vec[j][i];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                if (j < i + 1) {
+                    vec[i][j] = vec2[i][j];
+                }
+                else vec[i][j] = vec2[j][i];
+            }
+            cout << endl;
+        }
     }
 
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++)
+
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec.size(); j++)
         {
             cout << vec[i][j] << "  ";
         }
         cout << endl;
     }
-    
+
     if (TheNumberOfTheFirstRowContaining0(vec, size) < 0)
         cout << " there is no zero element in the matrix  " << endl;
     else
@@ -82,7 +100,7 @@ int main() {
         }
     }
 
-    if (s==0) {
+    if (s == 0) {
         for (int i = 0; i < vec.size(); i++) {
             for (int j = 0; j < vec.size(); j++) {
                 vec.pop_back();
