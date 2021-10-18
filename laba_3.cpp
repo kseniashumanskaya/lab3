@@ -1,28 +1,8 @@
 ﻿#include <iostream>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
-
-int TheNumberOfTheFirstRowContaining0(vector <vector<int>>vec, int size) {
-    vector<int> RowsContaining0;
-    int j;
-    int k = 0;
-    for (int i = 0; i < size; i++) {
-        for (j = 0; j < i + 1; j++) {
-            if (vec[i][j] == 0) {
-                RowsContaining0.push_back(min(i, j));
-                k++;
-            }     
-        }      
-    }
-    int num = 11;
-    for (int i = 0; i < k; i++) {
-        if (num > RowsContaining0[i]) {
-            num = RowsContaining0[i];
-        }
-    }
-    return num;
-}
 
 int GetElements(const vector<vector<int>>& vec, int i, int j) {
     if (j < i + 1) {
@@ -33,14 +13,26 @@ int GetElements(const vector<vector<int>>& vec, int i, int j) {
     }
 }
 
-void FillingTheMatrixFromConsol(vector<vector<int>> &vec, int size) {
+int TheNumberOfTheFirstRowContaining0(const vector <vector<int>>& vec) {
+    for (int i = 0; i < vec.size(); i++) {
+        for (int j = 0; j < vec.size(); j++) {
+            if (GetElements(vec, i, j) == 0) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+
+void FillingTheMatrixFromConsol(vector<vector<int>>& vec, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < i + 1; j++) {
             int n;
             cin >> n;
             vec[i].push_back(n);
-        }     
-    }   
+        }
+    }
 }
 
 void FillingTheMatrixWithRandomNumber(vector<vector<int>>& vec, int size) {
@@ -52,10 +44,22 @@ void FillingTheMatrixWithRandomNumber(vector<vector<int>>& vec, int size) {
     }
 }
 
-void matrixOutput(vector<vector<int>>& vec) {
+void FillingTheMatrix(vector<vector<int>>& vec, int size) {
+    int matrix_filling_option;
+    cin >> matrix_filling_option;
+    if (matrix_filling_option == 0) {
+        FillingTheMatrixWithRandomNumber(vec, size);
+    }
+    else {
+        FillingTheMatrixFromConsol(vec, size);
+    }
+}
+
+
+void matrixOutput(const vector<vector<int>>& vec) {
     for (int i = 0; i < vec.size(); i++) {
         for (int j = 0; j < vec.size(); j++) {
-            cout << GetElements(vec, i, j) << " ";
+            cout << setw(5) << GetElements(vec, i, j) << " ";
         }
         cout << endl;
     }
@@ -86,15 +90,15 @@ void NewMatrixOutput(vector<vector<int>>& vec, int size) {
             }
             for (int i = 0; i < size; i++)
                 vec[size - 1].erase(vec[size - 1].begin());
-            size--;
             k--;
+            size--;
         }
     }
 
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++)
         {
-            cout << GetElements(vec, i, j) << "  ";
+            cout << setw(5) << GetElements(vec, i, j);
         }
         cout << endl;
     }
@@ -106,21 +110,13 @@ int main() {
     cin >> size;
     vector<vector<int>> vec(size, vector<int>());
     cout << " enter 0 if you want to fill the matrix with random numbers and 1 - from consol" << endl;
-    int matrix_filling_option;
-    cin >> matrix_filling_option;
-    if (matrix_filling_option == 0) {
-        FillingTheMatrixWithRandomNumber(vec, size);
-    }
-    else {
-        FillingTheMatrixFromConsol(vec, size);
-    }  
+    FillingTheMatrix(vec, size);
     matrixOutput(vec);
-    if (TheNumberOfTheFirstRowContaining0(vec, size) > 10) {
+    if (TheNumberOfTheFirstRowContaining0(vec) < 0) {
         cout << " there is no zero element in the matrix  " << endl;
     }
     else {
-        cout << "the number of the first row containing 0 : " << TheNumberOfTheFirstRowContaining0(vec, size) + 1 << endl;
+        cout << "the number of the first row containing 0 : " << TheNumberOfTheFirstRowContaining0(vec) + 1 << endl;
     }
-
-    NewMatrixOutput(vec, size);  
+    NewMatrixOutput(vec, size);
 }
