@@ -106,17 +106,17 @@ void NewMatrixOutput(vector<vector<int>>& vec, int size) {
 
 int main() {
     int size;
-    cout << "enter the size of the matrix < 10:" << endl;
+    cout << "Enter the size of the matrix < 10:" << endl;
     cin >> size;
     vector<vector<int>> vec(size, vector<int>());
-    cout << " enter 0 if you want to fill the matrix with random numbers and 1 - from consol" << endl;
+    cout << " Enter 0 if you want to fill the matrix with random numbers and 1 - from consol" << endl;
     FillingTheMatrix(vec);
     matrixOutput(vec);
     if (TheNumberOfTheFirstRowContaining0(vec) < 0) {
-        cout << " there is no zero element in the matrix  " << endl;
+        cout << " There is no zero element in the matrix  " << endl;
     }
     else {
-        cout << "the number of the first row containing 0 : " << TheNumberOfTheFirstRowContaining0(vec) + 1 << endl;
+        cout << "The number of the first row containing 0 : " << TheNumberOfTheFirstRowContaining0(vec) + 1 << endl;
     }
     NewMatrixOutput(vec, size);
 }
