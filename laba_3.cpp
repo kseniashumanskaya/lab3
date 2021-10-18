@@ -41,7 +41,6 @@ void FillingTheMatrixFromConsol(vector<vector<int>> &vec, int size) {
             vec[i].push_back(n);
         }     
     }   
-    return;
 }
 
 void FillingTheMatrixWithRandomNumber(vector<vector<int>>& vec, int size) {
