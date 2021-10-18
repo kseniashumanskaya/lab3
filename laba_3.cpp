@@ -25,8 +25,8 @@ int TheNumberOfTheFirstRowContaining0(const vector <vector<int>>& vec) {
 }
 
 
-void FillingTheMatrixFromConsol(vector<vector<int>>& vec, int size) {
-    for (int i = 0; i < size; i++) {
+void FillingTheMatrixFromConsol(vector<vector<int>>& vec) {
+    for (int i = 0; i < vec.size(); i++) {
         for (int j = 0; j < i + 1; j++) {
             int n;
             cin >> n;
@@ -35,23 +35,23 @@ void FillingTheMatrixFromConsol(vector<vector<int>>& vec, int size) {
     }
 }
 
-void FillingTheMatrixWithRandomNumber(vector<vector<int>>& vec, int size) {
+void FillingTheMatrixWithRandomNumber(vector<vector<int>>& vec) {
     srand(time(0));
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < vec.size(); i++) {
         for (int j = 0; j < i + 1; j++) {
             vec[i].push_back(rand() % 20 - 10);
         }
     }
 }
 
-void FillingTheMatrix(vector<vector<int>>& vec, int size) {
+void FillingTheMatrix(vector<vector<int>>& vec) {
     int matrix_filling_option;
     cin >> matrix_filling_option;
     if (matrix_filling_option == 0) {
-        FillingTheMatrixWithRandomNumber(vec, size);
+        FillingTheMatrixWithRandomNumber(vec);
     }
     else {
-        FillingTheMatrixFromConsol(vec, size);
+        FillingTheMatrixFromConsol(vec);
     }
 }
 
@@ -110,7 +110,7 @@ int main() {
     cin >> size;
     vector<vector<int>> vec(size, vector<int>());
     cout << " enter 0 if you want to fill the matrix with random numbers and 1 - from consol" << endl;
-    FillingTheMatrix(vec, size);
+    FillingTheMatrix(vec);
     matrixOutput(vec);
     if (TheNumberOfTheFirstRowContaining0(vec) < 0) {
         cout << " there is no zero element in the matrix  " << endl;
